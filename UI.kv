@@ -1,5 +1,5 @@
-
 <Menu>:
+
 	canvas:
 		Color:
             rgba: [1, 1, 1, 1]
@@ -19,6 +19,7 @@
 				font_size: "60sp"
 				color: [0,0,0,1]
 				bold: True
+
 			Label:
 				id: highScoreMenuLabel
 				text: root.highScoreMenuLabelText
@@ -36,32 +37,27 @@
 				orientation: "horizontal"
 
 				Label:
-					size_hint: (.1,1)
 					text: ""
+					size_hint: (.1,1)
 
 				Button:
+					id: startGameButton
 					text: "Start Game"
 					font_size: "30sp"
 					background_color: [0,0,0,1]
-					id: startGameButton
 					on_release: root.callStart()
 
 				Label:
-					size_hint: (.1,1)
 					text: ""
+					size_hint: (.1,1)
 
 			Label:
 				text: ""
 
 
 
-
-
-
-
-
-
 <PressButton>:
+
 	canvas:
 		Color:
             rgba: [1, 1, 1, 1]
@@ -69,26 +65,27 @@
             pos: self.pos
             size: self.size
 
-	BoxLayout:
 
+	BoxLayout:
 		orientation: "vertical"
 
 		BoxLayout:
-
-			size_hint: 1,.1
 			orientation: "horizontal"
+			size_hint: 1,.1
 
 			Label:
 				id: scoreLabel
 				font_size: "23sp"
 				color: [0,0,0,1]
 				bold: True
+
 			Label:
 				id: timeLabel
 				text: "Time: 10 seconds"
 				font_size: "23sp"
 				color: [0,0,0,1]
 				bold: True
+
 
 		GridLayout:
 			rows:3
@@ -99,53 +96,62 @@
 				on_press: root.startAddScore(1)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button2
 				on_press: root.startAddScore(2)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button3
 				on_press: root.startAddScore(3)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button4
 				on_press: root.startAddScore(4)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button5
 				on_press: root.startAddScore(5)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button6
 				on_press: root.startAddScore(6)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button7
 				on_press: root.startAddScore(7)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button8
 				on_press: root.startAddScore(8)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button9
 				on_press: root.startAddScore(9)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
 
+
 		BoxLayout:
 			size_hint: 1,.2
 
 			Button:
+				id: startButton
 				text: "Start"
 				font_size: '35sp'
-				id: startButton
 				background_color: [0,0,0,1]
 				on_press: root.start()

@@ -33,52 +33,53 @@ green = [19/255.0, 190/255.0, 19/255.0, 1]
 timePopup = Popup()
 sound = SoundLoader.load('click.wav')
 
-
 Builder.load_file("UI.kv")
 
 if platform=="android":
     PythonActivity=autoclass("org.renpy.android.PythonActivity")
     AdBuddiz=autoclass("com.purplebrain.adbuddiz.sdk.AdBuddiz")
 
+
+
 class Menu(Screen):
+
 
 	highScoreMenuLabelText = "High Score: " + str(JsonStore('data.json').get('userData')["highScore"])
 
-
-	def setHighScore(self, dt):
-		highScoreMenuLabelText = "High Score: " + str(JsonStore('data.json').get('userData')["highScore"])
-		self.ids.highScoreMenuLabel.text = highScoreMenuLabelText
-
 	def callStart(self):
+
 		Clock.schedule_once(self.startGame, 0)
 
 	def startGame(self, dt):
-		sm.current = 'game'
 
+		sm.current = 'game'
 		Clock.schedule_interval(self.setHighScore, 1)
-		
+
 	def backToMenu(self):
+
 		sm.current = "menu"
-		
 		highScoreMenuLabelText = "High Score: " + str(JsonStore('data.json').get('userData')["highScore"])
 		self.ids.highScoreMenuLabel.text = highScoreMenuLabelText
-	
+
+    def setHighScore(self, dt):
+
+		highScoreMenuLabelText = "High Score: " + str(JsonStore('data.json').get('userData')["highScore"])
+		self.ids.highScoreMenuLabel.text = highScoreMenuLabelText
+
 	def show_ads(*args):
+
 		global AdBuddiz
-		AdBuddiz.showAd(PythonActivity.mActivity)	
-
-		
-
+		AdBuddiz.showAd(PythonActivity.mActivity)
 
 
 
 class PressButton(Screen):
 
+
 	def __init__(self, **kwargs):
+
 		super(PressButton, self).__init__(**kwargs)
-
 		self.finalScore = ""
-
 
 	def buttonsDisabled(self):
 
@@ -92,7 +93,6 @@ class PressButton(Screen):
 		self.ids.button8.disabled = True
 		self.ids.button9.disabled = True
 
-
 	def buttonsEnabled(self):
 
 		self.ids.button1.disabled = False
@@ -105,8 +105,8 @@ class PressButton(Screen):
 		self.ids.button8.disabled = False
 		self.ids.button9.disabled = False
 
-
 	def buttonsResetColor(self):
+
 		global blue
 
 		self.ids.button1.background_color = blue
@@ -119,9 +119,9 @@ class PressButton(Screen):
 		self.ids.button8.background_color = blue
 		self.ids.button9.background_color = blue
 
-
 	def buttonsResetSpecificColor(self, button):
-		global blue
+
+        global blue
 
 		if button == 1:
 			self.ids.button1.background_color = blue
@@ -144,8 +144,8 @@ class PressButton(Screen):
 
 
 	def checkIfAllClicked(self):
-		global blue
 
+		global blue
 		total = 0
 
 		if self.ids.button1.background_color == blue:
@@ -171,12 +171,9 @@ class PressButton(Screen):
 			return True
 			total = 0
 
-
-
 	def changeText(self):
-		global green
 
-		print "changeText"
+		global green
 
 		x = randint(1,3)
 		y = randint(4,6)
@@ -203,24 +200,23 @@ class PressButton(Screen):
 		elif z == 9:
 			self.ids.button9.background_color = green
 
-
 	def startAddScore(self, button):
+
 		self.addScore(button)
 
-
 	def callVibrate(self):
+
 		if vibrator.exists() == True:
 			vibrator.vibrate(.06)
 		else:
 			print "No vibrator"
 
-	
 	def addScore(self, button):
+
 		global green
 		global blue
 		global score
 		global sound
-
 
 		if button == 1:
 			if self.ids.button1.background_color == green:
@@ -296,32 +292,28 @@ class PressButton(Screen):
 				self.callVibrate()
 
 		self.ids.scoreLabel.text = "Score: " + str(score)
-
 		self.changeAfterThree()
 
-
 	def changeAfterThree(self):
+
 		global green
 		global blue
 
 		if self.checkIfAllClicked() == True:
-
 			self.changeText()
 
-
 	def addScoreNumber(self):
-		global score
 
+		global score
 		score = score + 1
 
 	def minusScoreNumber(self):
-		global score
 
+		global score
 		score = score - 1
 
-
-
 	def timer(self, dt):
+
 		global countdown
 		global timePopup
 
@@ -330,24 +322,20 @@ class PressButton(Screen):
 
 		if countdown <= 0:
 			Clock.unschedule(self.timer)
-
 			timePopup = ModalView(auto_dismiss = False, background_color = [1, 0, 0, .7])
 			timePopup.add_widget(Label(text="Game Over", font_size="50sp", color=[0,0,0,1]))
 			timePopup.open()
 			Clock.schedule_once(self.changeToEnd, 1.5)
 
-
-
 	def start(self):
-		global countdown
 
-		print "Start"
+		global countdown
 		sm.current = 'game'
 
 		self.ids.startButton.disabled = True
 		self.buttonsEnabled()
 		self.buttonsResetColor()
-		
+
 		countdown = 10
 		Clock.schedule_interval(self.timer, 1)
 
@@ -356,24 +344,19 @@ class PressButton(Screen):
 	def reset(self):
 
 		global score
-
-		score = 0
+        score = 0
 		self.ids.scoreLabel.text = "Score: " + str(score)
 		self.ids.timeLabel.text = "Time: 10 seconds"
-
 		self.ids.startButton.disabled = False
-
 		self.buttonsDisabled()
 		self.buttonsResetColor()
 
-
 	def changeToEnd(self, dt):
+
 		global score
 		global popup
 		global timePopup
-
 		timePopup.dismiss()
-
 		self.finalScore = str(score)
 
 		if JsonStore('data.json').get('userData')['highScore'] < score:
@@ -398,15 +381,15 @@ class PressButton(Screen):
 		self.reset()
 
 	def changeToMenu(self,dt):
+
 		global popup
 		Menu().backToMenu()
 		popup.dismiss()
 
-
 	def playAgain(self,dt):
+
 		global popup
 		popup.dismiss()
-			
 
 
 sm = ScreenManager(transition=WipeTransition())
@@ -414,23 +397,29 @@ sm.add_widget(Menu(name='menu'))
 sm.add_widget(PressButton(name='game'))
 
 
+
 class PressButtonApp(App):
+    
 
 	def on_start(self):
-		global AdBuddiz
 
+		global AdBuddiz
 		AdBuddiz.setPublisherKey("PublisherKey")
 		AdBuddiz.setTestModeActive()
 		AdBuddiz.cacheAds(PythonActivity.mActivity)
 
 	def on_pause(self):
+
 		return True
 
 	def on_resume(self):
+
 		pass
 
 	def build(self):
+
 		return sm
 
 if __name__ == '__main__':
+
     PressButtonApp().run()
