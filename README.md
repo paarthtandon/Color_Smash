@@ -11,6 +11,9 @@ The theme I used for this project was created by Federico Curzel. Here it the re
 I only used the default image, not the whole project.
 
 Here are some screenshots:
+
 ![Alt text](/screenshots/HomePage.png?raw=true "Menu")
+
 ![Alt text](/screenshots/Game.png?raw=true "During Gameplay")
+
 ![Alt text](/screenshots/End.png?raw=true "After Game")
