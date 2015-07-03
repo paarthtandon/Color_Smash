@@ -74,6 +74,10 @@ class Menu(Screen):
         else:
             print "Not on Android"
 
+    def changeToSettings(self):
+
+        sm.current = 'settings'
+
 
 
 class PressButton(Screen):
@@ -209,10 +213,13 @@ class PressButton(Screen):
 
     def callVibrate(self):
 
-        if platform == "android":
-            vibrator.vibrate(.06)
+        if JsonStore('vibrate.json').get('vibrateState')['activeOrNot'] == 'True':
+            if platform == "android":
+                vibrator.vibrate(.06)
+            else:
+                print "No vibrator"
         else:
-            print "No vibrator"
+            pass
 
     def addScore(self, button):
 
@@ -225,7 +232,7 @@ class PressButton(Screen):
             if self.ids.button1.background_color == green:
                 self.addScoreNumber()
                 self.buttonsResetSpecificColor(1)
-                sound.play()
+                self.playSound()
             else:
                 self.minusScoreNumber()
                 self.callVibrate()
@@ -233,7 +240,7 @@ class PressButton(Screen):
             if self.ids.button2.background_color == green:
                 self.addScoreNumber()
                 self.buttonsResetSpecificColor(2)
-                sound.play()
+                self.playSound()
             else:
                 self.minusScoreNumber()
                 self.callVibrate()
@@ -241,7 +248,7 @@ class PressButton(Screen):
             if self.ids.button3.background_color == green:
                 self.addScoreNumber()
                 self.buttonsResetSpecificColor(3)
-                sound.play()
+                self.playSound()
             else:
                 self.minusScoreNumber()
                 self.callVibrate()
@@ -249,7 +256,7 @@ class PressButton(Screen):
             if self.ids.button4.background_color == green:
                 self.addScoreNumber()
                 self.buttonsResetSpecificColor(4)
-                sound.play()
+                self.playSound()
             else:
                 self.minusScoreNumber()
                 self.callVibrate()
@@ -257,7 +264,7 @@ class PressButton(Screen):
             if self.ids.button5.background_color == green:
                 self.addScoreNumber()
                 self.buttonsResetSpecificColor(5)
-                sound.play()
+                self.playSound()
             else:
                 self.minusScoreNumber()
                 self.callVibrate()
@@ -265,7 +272,7 @@ class PressButton(Screen):
             if self.ids.button6.background_color == green:
                 self.addScoreNumber()
                 self.buttonsResetSpecificColor(6)
-                sound.play()
+                self.playSound()
             else:
                 self.minusScoreNumber()
                 self.callVibrate()
@@ -273,7 +280,7 @@ class PressButton(Screen):
             if self.ids.button7.background_color == green:
                 self.addScoreNumber()
                 self.buttonsResetSpecificColor(7)
-                sound.play()
+                self.playSound()
             else:
                 self.minusScoreNumber()
                 self.callVibrate()
@@ -281,7 +288,7 @@ class PressButton(Screen):
             if self.ids.button8.background_color == green:
                 self.addScoreNumber()
                 self.buttonsResetSpecificColor(8)
-                sound.play()
+                self.playSound()
             else:
                 self.minusScoreNumber()
                 self.callVibrate()
@@ -289,13 +296,22 @@ class PressButton(Screen):
             if self.ids.button9.background_color == green:
                 self.addScoreNumber()
                 self.buttonsResetSpecificColor(9)
-                sound.play()
+                self.playSound()
             else:
                 self.minusScoreNumber()
                 self.callVibrate()
 
         self.ids.scoreLabel.text = "Score: " + str(score)
         self.changeAfterThree()
+
+    def playSound(self):
+
+        global sound
+
+        if JsonStore('sound.json').get('soundState')['activeOrNot'] == 'True':
+            sound.play()
+        else:
+            pass
 
     def changeAfterThree(self):
 
@@ -396,9 +412,48 @@ class PressButton(Screen):
         popup.dismiss()
 
 
+
+class Settings(Screen):
+
+
+    def backToMenu(self):
+
+        sm.current = 'menu'
+
+    def checkSound(self):
+
+        if JsonStore('sound.json').get('soundState')['activeOrNot'] == 'True':
+            return True
+        else:
+            return False
+
+    def changeSound(self, active):
+
+        if active == True:
+            JsonStore('sound.json').put('soundState', activeOrNot='True')
+        else:
+            JsonStore('sound.json').put('soundState', activeOrNot='False')
+
+    def checkVibrate(self):
+
+        if JsonStore('vibrate.json').get('vibrateState')['activeOrNot'] == 'True':
+            return True
+        else:
+            return False
+
+    def changeVibrate(self, active):
+
+        if active == True:
+            JsonStore('vibrate.json').put('vibrateState', activeOrNot='True')
+        else:
+            JsonStore('vibrate.json').put('vibrateState', activeOrNot='False')
+
+
+
 sm = ScreenManager(transition=WipeTransition())
 sm.add_widget(Menu(name='menu'))
 sm.add_widget(PressButton(name='game'))
+sm.add_widget(Settings(name='settings'))
 
 
 

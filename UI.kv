@@ -54,6 +54,27 @@
 			Label:
 				text: ""
 
+			BoxLayout:
+				orientation: "horizontal"
+
+				Label:
+					text: ""
+					size_hint: (.1,1)
+
+				Button:
+					id: settingsButton
+					text: "Settings"
+					font_size: "30sp"
+					background_color: [0,0,0,1]
+					on_release: root.changeToSettings()
+
+				Label:
+					text: ""
+					size_hint: (.1,1)
+
+			Label:
+				text: ""
+
 
 
 <PressButton>:
@@ -155,3 +176,50 @@
 				font_size: '35sp'
 				background_color: [0,0,0,1]
 				on_press: root.start()
+
+
+
+<Settings>:
+
+	canvas:
+		Color:
+			rgba: [1, 1, 1, 1]
+		Rectangle:
+			pos: self.pos
+			size: self.size
+
+	BoxLayout:
+		orientation: 'vertical'
+
+		BoxLayout:
+			orientation: 'horizontal'
+
+			Label:
+				text: "Sound"
+				font_size: "23sp"
+				color: [0,0,0,1]
+
+			Switch:
+				id: soundSwitch
+				active: root.checkSound()
+				on_active: root.changeSound(self.active)
+
+		BoxLayout:
+			orientation: 'horizontal'
+
+			Label:
+				text: "Vibrate"
+				font_size: "23sp"
+				color: [0,0,0,1]
+
+			Switch:
+				id: vibrateSwitch
+				active: root.checkVibrate()
+				on_active: root.changeVibrate(self.active)
+
+		Button:
+			id: backToMenuButton
+			text: "Back"
+			font_size: '35sp'
+			background_color: [0,0,0,1]
+			on_release: root.backToMenu()
