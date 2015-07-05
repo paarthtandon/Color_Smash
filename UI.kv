@@ -22,7 +22,7 @@
 
 			Label:
 				id: highScoreMenuLabel
-				text: root.highScoreMenuLabelText
+				text: root.high_score_menu_label_text
 				font_size: "35sp"
 				color: [0,0,0,1]
 				bold: True
@@ -45,7 +45,7 @@
 					text: "Start Game"
 					font_size: "30sp"
 					background_color: [0,0,0,1]
-					on_release: root.callStart()
+					on_release: root.call_start()
 
 				Label:
 					text: ""
@@ -66,7 +66,7 @@
 					text: "Settings"
 					font_size: "30sp"
 					background_color: [0,0,0,1]
-					on_release: root.changeToSettings()
+					on_release: root.change_to_settings()
 
 				Label:
 					text: ""
@@ -115,55 +115,55 @@
 
 			Button:
 				id: button1
-				on_press: root.startAddScore(1)
+				on_press: root.start_add_score(1)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
 
 			Button:
 				id: button2
-				on_press: root.startAddScore(2)
+				on_press: root.start_add_score(2)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
 
 			Button:
 				id: button3
-				on_press: root.startAddScore(3)
+				on_press: root.start_add_score(3)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
 
 			Button:
 				id: button4
-				on_press: root.startAddScore(4)
+				on_press: root.start_add_score(4)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
 
 			Button:
 				id: button5
-				on_press: root.startAddScore(5)
+				on_press: root.start_add_score(5)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
 
 			Button:
 				id: button6
-				on_press: root.startAddScore(6)
+				on_press: root.start_add_score(6)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
 
 			Button:
 				id: button7
-				on_press: root.startAddScore(7)
+				on_press: root.start_add_score(7)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
 
 			Button:
 				id: button8
-				on_press: root.startAddScore(8)
+				on_press: root.start_add_score(8)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
 
 			Button:
 				id: button9
-				on_press: root.startAddScore(9)
+				on_press: root.start_add_score(9)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
 
@@ -202,8 +202,8 @@
 
 			Switch:
 				id: soundSwitch
-				active: root.checkSound()
-				on_active: root.changeSound(self.active)
+				active: root.check_sound()
+				on_active: root.change_sound(self.active)
 
 		BoxLayout:
 			orientation: 'horizontal'
@@ -215,12 +215,12 @@
 
 			Switch:
 				id: vibrateSwitch
-				active: root.checkVibrate()
-				on_active: root.changeVibrate(self.active)
+				active: root.check_vibrate()
+				on_active: root.change_vibrate(self.active)
 
 		Button:
 			id: backToMenuButton
 			text: "Back"
 			font_size: '35sp'
 			background_color: [0,0,0,1]
-			on_release: root.backToMenu()
+			on_release: root.back_to_menu()

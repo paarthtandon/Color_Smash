@@ -56,18 +56,18 @@ class Menu(Screen):
 		sm.current = 'game'
 
 		Clock.schedule_interval(self.setHighScore, 1)
-		
+
 	def backToMenu(self):
 		sm.current = "menu"
-		
+
 		highScoreMenuLabelText = "High Score: " + str(JsonStore('data.json').get('userData')["highScore"])
 		self.ids.highScoreMenuLabel.text = highScoreMenuLabelText
-	
+
 	def show_ads(*args):
 		global AdBuddiz
-		AdBuddiz.showAd(PythonActivity.mActivity)	
+		AdBuddiz.showAd(PythonActivity.mActivity)
 
-		
+
 
 
 
@@ -176,7 +176,7 @@ class PressButton(Screen):
 	def changeText(self):
 		global green
 
-		print "changeText"
+		print "change_text"
 
 		x = randint(1,3)
 		y = randint(4,6)
@@ -214,7 +214,7 @@ class PressButton(Screen):
 		else:
 			print "No vibrator"
 
-	
+
 	def addScore(self, button):
 		global green
 		global blue
@@ -347,7 +347,7 @@ class PressButton(Screen):
 		self.ids.startButton.disabled = True
 		self.buttonsEnabled()
 		self.buttonsResetColor()
-		
+
 		countdown = 10
 		Clock.schedule_interval(self.timer, 1)
 
@@ -406,7 +406,7 @@ class PressButton(Screen):
 	def playAgain(self,dt):
 		global popup
 		popup.dismiss()
-			
+
 
 
 sm = ScreenManager(transition=WipeTransition())
