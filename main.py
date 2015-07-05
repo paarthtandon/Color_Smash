@@ -315,7 +315,6 @@ class PressButton(Screen):
 
     def animateAfterTouch(self):
 
-        self.ids.buttonsGrid.spacing = [9,9]
         Clock.schedule_once(self.unAnimateAfterTouch, 0.1)
 
     def unAnimateAfterTouch(self, dt):
