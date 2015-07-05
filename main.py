@@ -26,15 +26,15 @@ green = [19 / 255.0, 190 / 255.0, 19 / 255.0, 1]
 timePopup = Popup()
 sound = SoundLoader.load('snd/click.wav')
 
-Builder.load_file("UI.kv")
+Builder.load_file('UI.kv')
 
-if platform == "android":
-    PythonActivity = autoclass("org.renpy.android.PythonActivity")
-    AdBuddiz = autoclass("com.purplebrain.adbuddiz.sdk.AdBuddiz")
+if platform == 'android':
+    PythonActivity = autoclass('org.renpy.android.PythonActivity')
+    AdBuddiz = autoclass('com.purplebrain.adbuddiz.sdk.AdBuddiz')
 
 
 class Menu(Screen):
-    high_score_menu_label_text = "High Score: " + str(JsonStore('data/data.json').get('userData')["highScore"])
+    high_score_menu_label_text = 'High Score: ' + str(JsonStore('data/data.json').get('userData')['highScore'])
 
     def call_start(self):
 
@@ -47,22 +47,22 @@ class Menu(Screen):
 
     def back_to_menu(self):
 
-        sm.current = "menu"
-        high_score_menu_label_text = "High Score: " + str(JsonStore('data/data.json').get('userData')["highScore"])
+        sm.current = 'menu'
+        high_score_menu_label_text = 'High Score: ' + str(JsonStore('data/data.json').get('userData')['highScore'])
         self.ids.highScoreMenuLabel.text = high_score_menu_label_text
 
     def set_high_score(self, dt):
 
-        high_score_menu_label_text = "High Score: " + str(JsonStore('data/data.json').get('userData')["highScore"])
+        high_score_menu_label_text = 'High Score: ' + str(JsonStore('data/data.json').get('userData')['highScore'])
         self.ids.highScoreMenuLabel.text = high_score_menu_label_text
 
     def show_ads(*args):
 
-        if platform == "android":
+        if platform == 'android':
             global AdBuddiz
             AdBuddiz.showAd(PythonActivity.mActivity)
         else:
-            print "Not on Android"
+            print 'Not on Android'
 
     def change_to_settings(self):
 
@@ -73,7 +73,7 @@ class PressButton(Screen):
     def __init__(self, **kwargs):
 
         super(PressButton, self).__init__(**kwargs)
-        self.finalScore = ""
+        self.finalScore = ''
 
     def buttons_disabled(self):
 
@@ -200,10 +200,10 @@ class PressButton(Screen):
     def call_vibrate(self):
 
         if JsonStore('data/vibrate.json').get('vibrateState')['activeOrNot'] == 'True':
-            if platform == "android":
+            if platform == 'android':
                 vibrator.vibrate(.06)
             else:
-                print "No vibrator"
+                print 'No vibrator'
         else:
             pass
 
@@ -296,7 +296,7 @@ class PressButton(Screen):
                 self.minus_score_number()
                 self.call_vibrate()
 
-        self.ids.scoreLabel.text = "Score: " + str(score)
+        self.ids.scoreLabel.text = 'Score: ' + str(score)
         self.change_after_three()
 
     def animate_after_touch(self):
@@ -340,12 +340,12 @@ class PressButton(Screen):
         global timePopup
 
         countdown = countdown - 1
-        self.ids.timeLabel.text = "Time: " + str(countdown) + " seconds"
+        self.ids.timeLabel.text = 'Time: ' + str(countdown) + ' seconds'
 
         if countdown <= 0:
             Clock.unschedule(self.timer)
             timePopup = ModalView(auto_dismiss=False, background_color=[1, 0, 0, .7])
-            timePopup.add_widget(Label(text="Game Over", font_size="50sp", color=[0, 0, 0, 1]))
+            timePopup.add_widget(Label(text='Game Over', font_size='50sp', color=[0, 0, 0, 1]))
             timePopup.open()
             Clock.schedule_once(self.change_to_end, 1.5)
 
@@ -367,8 +367,8 @@ class PressButton(Screen):
 
         global score
         score = 0
-        self.ids.scoreLabel.text = "Score: " + str(score)
-        self.ids.timeLabel.text = "Time: 10 seconds"
+        self.ids.scoreLabel.text = 'Score: ' + str(score)
+        self.ids.timeLabel.text = 'Time: 10 seconds'
         self.ids.startButton.disabled = False
         self.buttons_disabled()
         self.buttons_reset_color()
@@ -385,13 +385,13 @@ class PressButton(Screen):
             JsonStore('data/data.json').put('userData', highScore=score)
 
         popup_content = BoxLayout(orientation='vertical', spacing=3)
-        play_again_button = Button(text="Play Again", on_release=self.play_again, font_size="40sp",
+        play_again_button = Button(text='Play Again', on_release=self.play_again, font_size='40sp',
                                  background_color=[0, 0, 0, 1])
-        back_to_menu_button = Button(text="Back To Menu", on_release=self.change_to_menu, font_size="40sp",
+        back_to_menu_button = Button(text='Back To Menu', on_release=self.change_to_menu, font_size='40sp',
                                   background_color=[0, 0, 0, 1])
-        final_score_label = Label(text="Score: " + self.finalScore, font_size="50sp", color=[0, 0, 0, 1])
-        high_score_label = Label(text="High Score: " + str(JsonStore('data/data.json').get('userData', )['highScore']),
-                               font_size="50sp", color=[0, 0, 0, 1])
+        final_score_label = Label(text='Score: ' + self.finalScore, font_size='50sp', color=[0, 0, 0, 1])
+        high_score_label = Label(text='High Score: ' + str(JsonStore('data/data.json').get('userData', )['highScore']),
+                               font_size='50sp', color=[0, 0, 0, 1])
 
         popup_content.add_widget(final_score_label)
         popup_content.add_widget(high_score_label)
@@ -400,7 +400,7 @@ class PressButton(Screen):
 
         popup = ModalView(auto_dismiss=False, background_color=[1, 0, 0, .7])
         popup.add_widget(popup_content)
-        if platform == "android":
+        if platform == 'android':
             popup.bind(on_dismiss=Menu().show_ads())
         popup.open()
 
@@ -460,9 +460,9 @@ sm.add_widget(Settings(name='settings'))
 
 class PressButtonApp(App):
     def on_start(self):
-        if platform == "android":
+        if platform == 'android':
             global AdBuddiz
-            AdBuddiz.setPublisherKey("PublisherKey")
+            AdBuddiz.setPublisherKey('PublisherKey')
             AdBuddiz.setTestModeActive()
             AdBuddiz.cacheAds(PythonActivity.mActivity)
 
