@@ -43,10 +43,10 @@ requirements = kivy, plyer, pyjnius
 #garden_requirements =
 
 # (str) Presplash of the application
-presplash.filename = presplash.png
+presplash.filename = img/presplash.png
 
 # (str) Icon of the application
-icon.filename = app_icon.png
+icon.filename = img/app_icon.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
 orientation = portrait

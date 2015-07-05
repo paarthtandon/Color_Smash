@@ -24,14 +24,14 @@ from random import randint
 import os
 
 
-store = JsonStore('data.json')
+store = JsonStore('data/data.json')
 score = 0
 countdown = 0
 popup = Popup()
 blue  = [79/255.0, 110/255.0, 238/255.0, 1]
 green = [19/255.0, 190/255.0, 19/255.0, 1]
 timePopup = Popup()
-sound = SoundLoader.load('click.wav')
+sound = SoundLoader.load('snd/click.wav')
 
 Builder.load_file("UI.kv")
 
@@ -44,7 +44,7 @@ if platform=="android":
 class Menu(Screen):
 
 
-    highScoreMenuLabelText = "High Score: " + str(JsonStore('data.json').get('userData')["highScore"])
+    highScoreMenuLabelText = "High Score: " + str(JsonStore('data/data.json').get('userData')["highScore"])
 
     def callStart(self):
 
@@ -58,12 +58,12 @@ class Menu(Screen):
     def backToMenu(self):
 
         sm.current = "menu"
-        highScoreMenuLabelText = "High Score: " + str(JsonStore('data.json').get('userData')["highScore"])
+        highScoreMenuLabelText = "High Score: " + str(JsonStore('data/data.json').get('userData')["highScore"])
         self.ids.highScoreMenuLabel.text = highScoreMenuLabelText
 
     def setHighScore(self, dt):
 
-        highScoreMenuLabelText = "High Score: " + str(JsonStore('data.json').get('userData')["highScore"])
+        highScoreMenuLabelText = "High Score: " + str(JsonStore('data/data.json').get('userData')["highScore"])
         self.ids.highScoreMenuLabel.text = highScoreMenuLabelText
 
     def show_ads(*args):
@@ -213,7 +213,7 @@ class PressButton(Screen):
 
     def callVibrate(self):
 
-        if JsonStore('vibrate.json').get('vibrateState')['activeOrNot'] == 'True':
+        if JsonStore('data/vibrate.json').get('vibrateState')['activeOrNot'] == 'True':
             if platform == "android":
                 vibrator.vibrate(.06)
             else:
@@ -231,6 +231,7 @@ class PressButton(Screen):
         if button == 1:
             if self.ids.button1.background_color == green:
                 self.addScoreNumber()
+                self.animateAfterTouch()
                 self.buttonsResetSpecificColor(1)
                 self.playSound()
             else:
@@ -239,6 +240,7 @@ class PressButton(Screen):
         elif button == 2:
             if self.ids.button2.background_color == green:
                 self.addScoreNumber()
+                self.animateAfterTouch()
                 self.buttonsResetSpecificColor(2)
                 self.playSound()
             else:
@@ -247,6 +249,7 @@ class PressButton(Screen):
         elif button == 3:
             if self.ids.button3.background_color == green:
                 self.addScoreNumber()
+                self.animateAfterTouch()
                 self.buttonsResetSpecificColor(3)
                 self.playSound()
             else:
@@ -255,6 +258,7 @@ class PressButton(Screen):
         elif button == 4:
             if self.ids.button4.background_color == green:
                 self.addScoreNumber()
+                self.animateAfterTouch()
                 self.buttonsResetSpecificColor(4)
                 self.playSound()
             else:
@@ -263,6 +267,7 @@ class PressButton(Screen):
         elif button == 5:
             if self.ids.button5.background_color == green:
                 self.addScoreNumber()
+                self.animateAfterTouch()
                 self.buttonsResetSpecificColor(5)
                 self.playSound()
             else:
@@ -271,6 +276,7 @@ class PressButton(Screen):
         elif button == 6:
             if self.ids.button6.background_color == green:
                 self.addScoreNumber()
+                self.animateAfterTouch()
                 self.buttonsResetSpecificColor(6)
                 self.playSound()
             else:
@@ -279,6 +285,7 @@ class PressButton(Screen):
         elif button == 7:
             if self.ids.button7.background_color == green:
                 self.addScoreNumber()
+                self.animateAfterTouch()
                 self.buttonsResetSpecificColor(7)
                 self.playSound()
             else:
@@ -287,6 +294,7 @@ class PressButton(Screen):
         elif button == 8:
             if self.ids.button8.background_color == green:
                 self.addScoreNumber()
+                self.animateAfterTouch()
                 self.buttonsResetSpecificColor(8)
                 self.playSound()
             else:
@@ -295,6 +303,7 @@ class PressButton(Screen):
         elif button == 9:
             if self.ids.button9.background_color == green:
                 self.addScoreNumber()
+                self.animateAfterTouch()
                 self.buttonsResetSpecificColor(9)
                 self.playSound()
             else:
@@ -304,11 +313,20 @@ class PressButton(Screen):
         self.ids.scoreLabel.text = "Score: " + str(score)
         self.changeAfterThree()
 
+    def animateAfterTouch(self):
+
+        self.ids.buttonsGrid.spacing = [9,9]
+        Clock.schedule_once(self.unAnimateAfterTouch, 0.1)
+
+    def unAnimateAfterTouch(self, dt):
+
+        self.ids.buttonsGrid.spacing = [3,3]
+
     def playSound(self):
 
         global sound
 
-        if JsonStore('sound.json').get('soundState')['activeOrNot'] == 'True':
+        if JsonStore('data/sound.json').get('soundState')['activeOrNot'] == 'True':
             sound.play()
         else:
             pass
@@ -378,14 +396,14 @@ class PressButton(Screen):
         timePopup.dismiss()
         self.finalScore = str(score)
 
-        if JsonStore('data.json').get('userData')['highScore'] < score:
-            JsonStore('data.json').put('userData', highScore=score)
+        if JsonStore('data/data.json').get('userData')['highScore'] < score:
+            JsonStore('data/data.json').put('userData', highScore=score)
 
         popupContent = BoxLayout(orientation = 'vertical', spacing=3)
         playAgainButton = Button(text = "Play Again", on_release = self.playAgain, font_size = "40sp", background_color = [0,0,0,1])
         backToMenuButton = Button(text = "Back To Menu", on_release = self.changeToMenu, font_size = "40sp", background_color = [0,0,0,1])
         finalScoreLabel = Label(text = "Score: " + self.finalScore, font_size="50sp", color=[0,0,0,1])
-        highScoreLabel = Label(text = "High Score: " + str(JsonStore('data.json').get('userData',)['highScore']), font_size="50sp", color=[0,0,0,1])
+        highScoreLabel = Label(text = "High Score: " + str(JsonStore('data/data.json').get('userData',)['highScore']), font_size="50sp", color=[0,0,0,1])
 
         popupContent.add_widget(finalScoreLabel)
         popupContent.add_widget(highScoreLabel)
@@ -422,7 +440,7 @@ class Settings(Screen):
 
     def checkSound(self):
 
-        if JsonStore('sound.json').get('soundState')['activeOrNot'] == 'True':
+        if JsonStore('data/sound.json').get('soundState')['activeOrNot'] == 'True':
             return True
         else:
             return False
@@ -430,13 +448,13 @@ class Settings(Screen):
     def changeSound(self, active):
 
         if active == True:
-            JsonStore('sound.json').put('soundState', activeOrNot='True')
+            JsonStore('data/sound.json').put('soundState', activeOrNot='True')
         else:
-            JsonStore('sound.json').put('soundState', activeOrNot='False')
+            JsonStore('data/sound.json').put('soundState', activeOrNot='False')
 
     def checkVibrate(self):
 
-        if JsonStore('vibrate.json').get('vibrateState')['activeOrNot'] == 'True':
+        if JsonStore('data/vibrate.json').get('vibrateState')['activeOrNot'] == 'True':
             return True
         else:
             return False
@@ -444,9 +462,9 @@ class Settings(Screen):
     def changeVibrate(self, active):
 
         if active == True:
-            JsonStore('vibrate.json').put('vibrateState', activeOrNot='True')
+            JsonStore('data/vibrate.json').put('vibrateState', activeOrNot='True')
         else:
-            JsonStore('vibrate.json').put('vibrateState', activeOrNot='False')
+            JsonStore('data/vibrate.json').put('vibrateState', activeOrNot='False')
 
 
 
