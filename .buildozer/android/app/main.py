@@ -56,14 +56,6 @@ class Menu(Screen):
         high_score_menu_label_text = 'High Score: ' + str(JsonStore('data/data.json').get('userData')['highScore'])
         self.ids.highScoreMenuLabel.text = high_score_menu_label_text
 
-    def show_ads(*args):
-
-        if platform == 'android':
-            global AdBuddiz
-            AdBuddiz.showAd(PythonActivity.mActivity)
-        else:
-            print 'Not on Android'
-
     def change_to_settings(self):
 
         sm.current = 'settings'
@@ -74,6 +66,14 @@ class PressButton(Screen):
 
         super(PressButton, self).__init__(**kwargs)
         self.finalScore = ''
+
+    def show_ads(*args):
+
+        if platform == 'android':
+            global AdBuddiz
+            AdBuddiz.showAd(PythonActivity.mActivity)
+        else:
+            print 'Not on Android'
 
     def buttons_disabled(self):
 
@@ -340,7 +340,7 @@ class PressButton(Screen):
         global timePopup
 
         countdown = countdown - 1
-        self.ids.timeLabel.text = 'Time: ' + str(countdown) + ' seconds'
+        self.ids.timeLabel.text = 'Time: ' + str(countdown)
 
         if countdown <= 0:
             Clock.unschedule(self.timer)
@@ -368,7 +368,7 @@ class PressButton(Screen):
         global score
         score = 0
         self.ids.scoreLabel.text = 'Score: ' + str(score)
-        self.ids.timeLabel.text = 'Time: 10 seconds'
+        self.ids.timeLabel.text = 'Time: 10'
         self.ids.startButton.disabled = False
         self.buttons_disabled()
         self.buttons_reset_color()
@@ -378,7 +378,13 @@ class PressButton(Screen):
         global score
         global popup
         global timePopup
+        global AdBuddiz
+
         timePopup.dismiss()
+        if platform == 'android':
+            AdBuddiz.showAd(PythonActivity.mActivity)
+        else:
+            print "Not on android"
         self.finalScore = str(score)
 
         if JsonStore('data/data.json').get('userData')['highScore'] < score:
@@ -400,8 +406,6 @@ class PressButton(Screen):
 
         popup = ModalView(auto_dismiss=False, background_color=[1, 0, 0, .7])
         popup.add_widget(popup_content)
-        if platform == 'android':
-            popup.bind(on_dismiss=Menu().show_ads())
         popup.open()
 
         self.reset()
@@ -462,7 +466,7 @@ class PressButtonApp(App):
     def on_start(self):
         if platform == 'android':
             global AdBuddiz
-            AdBuddiz.setPublisherKey('PublisherKey')
+            AdBuddiz.setPublisherKey('cfbc5a8a-649c-4923-a28d-96d46efa9191')
             AdBuddiz.setTestModeActive()
             AdBuddiz.cacheAds(PythonActivity.mActivity)
 
