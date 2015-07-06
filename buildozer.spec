@@ -1,10 +1,10 @@
 [app]
 
 # (str) Title of your application
-title = Tap Game
+title = Color Smash
 
 # (str) Package name
-package.name = tapgame
+package.name = colorsmash
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = org.paarthri
