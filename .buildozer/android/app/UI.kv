@@ -1,5 +1,5 @@
-
 <Menu>:
+
 	canvas:
 		Color:
             rgba: [1, 1, 1, 1]
@@ -9,59 +9,76 @@
 
 
 	BoxLayout:
-		orientation: "vertical"
+		orientation: 'vertical'
 
 		BoxLayout:
 			orientation: 'vertical'
 
 			Label:
-				text: "Tap Game"
-				font_size: "60sp"
+				text: 'Tap Game'
+				font_size: '60sp'
 				color: [0,0,0,1]
 				bold: True
+
 			Label:
 				id: highScoreMenuLabel
-				text: root.highScoreMenuLabelText
-				font_size: "35sp"
+				text: root.high_score_menu_label_text
+				font_size: '35sp'
 				color: [0,0,0,1]
 				bold: True
 
 		BoxLayout:
-			orientation: "vertical"
+			orientation: 'vertical'
 
 			Label:
-				text: ""
+				text: ''
 
 			BoxLayout:
-				orientation: "horizontal"
+				orientation: 'horizontal'
 
 				Label:
+					text: ''
 					size_hint: (.1,1)
-					text: ""
 
 				Button:
-					text: "Start Game"
-					font_size: "30sp"
-					background_color: [0,0,0,1]
 					id: startGameButton
-					on_release: root.callStart()
+					text: 'Start Game'
+					font_size: '30sp'
+					background_color: [0,0,0,1]
+					on_release: root.call_start()
 
 				Label:
+					text: ''
 					size_hint: (.1,1)
-					text: ""
 
 			Label:
-				text: ""
+				text: ''
 
+			BoxLayout:
+				orientation: 'horizontal'
 
+				Label:
+					text: ''
+					size_hint: (.1,1)
 
+				Button:
+					id: settingsButton
+					text: 'Settings'
+					font_size: '30sp'
+					background_color: [0,0,0,1]
+					on_release: root.change_to_settings()
 
+				Label:
+					text: ''
+					size_hint: (.1,1)
 
-
+			Label:
+				text: ''
 
 
 
 <PressButton>:
+
 	canvas:
 		Color:
             rgba: [1, 1, 1, 1]
@@ -69,83 +86,141 @@
             pos: self.pos
             size: self.size
 
-	BoxLayout:
 
-		orientation: "vertical"
+	BoxLayout:
+		orientation: 'vertical'
 
 		BoxLayout:
-
+			orientation: 'horizontal'
 			size_hint: 1,.1
-			orientation: "horizontal"
 
 			Label:
 				id: scoreLabel
-				font_size: "23sp"
-				color: [0,0,0,1]
-				bold: True
-			Label:
-				id: timeLabel
-				text: "Time: 10 seconds"
-				font_size: "23sp"
+				font_size: '23sp'
 				color: [0,0,0,1]
 				bold: True
 
+			Label:
+				id: timeLabel
+				text: 'Time: 10 seconds'
+				font_size: '23sp'
+				color: [0,0,0,1]
+				bold: True
+
+
 		GridLayout:
+			id: buttonsGrid
 			rows:3
 			spacing: [3,3]
 
 			Button:
 				id: button1
-				on_press: root.startAddScore(1)
+				on_press: root.start_add_score(1)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button2
-				on_press: root.startAddScore(2)
+				on_press: root.start_add_score(2)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button3
-				on_press: root.startAddScore(3)
+				on_press: root.start_add_score(3)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button4
-				on_press: root.startAddScore(4)
+				on_press: root.start_add_score(4)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button5
-				on_press: root.startAddScore(5)
+				on_press: root.start_add_score(5)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button6
-				on_press: root.startAddScore(6)
+				on_press: root.start_add_score(6)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button7
-				on_press: root.startAddScore(7)
+				on_press: root.start_add_score(7)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button8
-				on_press: root.startAddScore(8)
+				on_press: root.start_add_score(8)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 			Button:
 				id: button9
-				on_press: root.startAddScore(9)
+				on_press: root.start_add_score(9)
 				disabled: True
 				background_color: [79/255.0, 110/255.0, 238/255.0, 1]
+
 
 		BoxLayout:
 			size_hint: 1,.2
 
 			Button:
-				text: "Start"
-				font_size: '35sp'
 				id: startButton
+				text: 'Start'
+				font_size: '35sp'
 				background_color: [0,0,0,1]
 				on_press: root.start()
+
+
+
+<Settings>:
+
+	canvas:
+		Color:
+			rgba: [1, 1, 1, 1]
+		Rectangle:
+			pos: self.pos
+			size: self.size
+
+	BoxLayout:
+		orientation: 'vertical'
+
+		BoxLayout:
+			orientation: 'horizontal'
+
+			Label:
+				text: 'Sound'
+				font_size: '23sp'
+				color: [0,0,0,1]
+
+			Switch:
+				id: soundSwitch
+				active: root.check_sound()
+				on_active: root.change_sound(self.active)
+
+		BoxLayout:
+			orientation: 'horizontal'
+
+			Label:
+				text: 'Vibrate'
+				font_size: '23sp'
+				color: [0,0,0,1]
+
+			Switch:
+				id: vibrateSwitch
+				active: root.check_vibrate()
+				on_active: root.change_vibrate(self.active)
+
+		Button:
+			id: backToMenuButton
+			text: 'Back'
+			font_size: '35sp'
+			background_color: [0,0,0,1]
+			on_release: root.back_to_menu()

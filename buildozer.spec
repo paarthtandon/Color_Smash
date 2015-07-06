@@ -29,7 +29,7 @@ source.include_exts = py,png,jpg,kv,atlas,json,mp3,wav
 #version.filename = %(source.dir)s/main.py
 
 # (str) Application versioning (method 2)
-version = 1.1.5
+version = 1.1.6
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
@@ -148,7 +148,7 @@ android.add_jars = %(source.dir)s/libs/*.jar
 [buildozer]
 
 # (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
-log_level = 1
+log_level = 2
 
 # (int) Display warning if buildozer is run as root (0 = False, 1 = True)
 warn_on_root = 1
