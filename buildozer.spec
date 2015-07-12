@@ -29,7 +29,7 @@ source.include_exts = py,png,jpg,kv,atlas,json,mp3,wav
 #version.filename = %(source.dir)s/main.py
 
 # (str) Application versioning (method 2)
-version = 1.1.6
+version = 1.1.7
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
@@ -96,7 +96,7 @@ android.permissions = WRITE_EXTERNAL_STORAGE, INTERNET, VIBRATE, ACCESS_WIFI_STA
 # their classes. Don't add jars that you do not need, since extra jars can slow
 # down the build process. Allows wildcards matching, for example:
 # OUYA-ODK/libs/*.jar
-android.add_jars = %(source.dir)s/libs/*.jar
+#android.add_jars = %(source.dir)s/libs/*.jar
 
 # (list) List of Java files to add to the android project (can be java or a
 # directory containing the files)
@@ -131,7 +131,7 @@ android.add_jars = %(source.dir)s/libs/*.jar
 
 # (list) Android library project to add (will be added in the
 # project.properties automatically.)
-#android.library_references =
+#android.library_references = 
 
 #
 # iOS specific

@@ -1,10 +1,10 @@
 [app]
 
 # (str) Title of your application
-title = Tap Game
+title = Color Smash
 
 # (str) Package name
-package.name = tapgame
+package.name = colorsmash
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = org.paarthri
@@ -29,7 +29,7 @@ source.include_exts = py,png,jpg,kv,atlas,json,mp3,wav
 #version.filename = %(source.dir)s/main.py
 
 # (str) Application versioning (method 2)
-version = 1.1.6
+version = 1.1.7
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
@@ -131,7 +131,7 @@ android.add_jars = %(source.dir)s/libs/*.jar
 
 # (list) Android library project to add (will be added in the
 # project.properties automatically.)
-#android.library_references =
+#android.library_references = 
 
 #
 # iOS specific

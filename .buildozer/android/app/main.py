@@ -28,10 +28,6 @@ sound = SoundLoader.load('snd/click.wav')
 
 Builder.load_file('UI.kv')
 
-if platform == 'android':
-    PythonActivity = autoclass('org.renpy.android.PythonActivity')
-    AdBuddiz = autoclass('com.purplebrain.adbuddiz.sdk.AdBuddiz')
-
 
 class Menu(Screen):
     high_score_menu_label_text = 'High Score: ' + str(JsonStore('data/data.json').get('userData')['highScore'])
@@ -378,13 +374,8 @@ class PressButton(Screen):
         global score
         global popup
         global timePopup
-        global AdBuddiz
 
         timePopup.dismiss()
-        if platform == 'android':
-            AdBuddiz.showAd(PythonActivity.mActivity)
-        else:
-            print "Not on android"
         self.finalScore = str(score)
 
         if JsonStore('data/data.json').get('userData')['highScore'] < score:
@@ -463,12 +454,7 @@ sm.add_widget(Settings(name='settings'))
 
 
 class PressButtonApp(App):
-    def on_start(self):
-        if platform == 'android':
-            global AdBuddiz
-            AdBuddiz.setPublisherKey('cfbc5a8a-649c-4923-a28d-96d46efa9191')
-            AdBuddiz.setTestModeActive()
-            AdBuddiz.cacheAds(PythonActivity.mActivity)
+
 
     def on_pause(self):
         return True
