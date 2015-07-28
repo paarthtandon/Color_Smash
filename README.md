@@ -9,7 +9,7 @@ I only used the default image, not the whole project.
 
 Here are some screenshots:
 
-![Alt text](/screenshots/HomePage.png?raw=true "Menu")
+![Alt text](/screenshots/Menu.png?raw=true "Menu")
 
 ![Alt text](/screenshots/Game.png?raw=true "During Gameplay")
 
